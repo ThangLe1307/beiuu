@@ -1,0 +1,1043 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quà Tặng 8/3 💝</title>
+    <style>
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-family: 'Segoe UI', sans-serif;
+}
+
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    background-color: #2a2a2a;
+    background-image: radial-gradient(circle at 20% 50%, #3d1a2e 0%, #1a1a2e 100%);
+}
+
+.app-container {
+    width: 375px;
+    height: 812px;
+    background-color: #ffb8c6;
+    border-radius: 40px;
+    box-shadow: 0 20px 60px rgba(0,0,0,0.6), 0 0 0 8px #1a1a1a;
+    overflow: hidden;
+    position: relative;
+    flex-shrink: 0;
+}
+
+.screen {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top: 0; left: 0;
+    transition: opacity 0.4s ease;
+}
+
+.hidden { opacity: 0; pointer-events: none; z-index: -1; }
+.active { opacity: 1; pointer-events: auto; z-index: 10; }
+
+/* ========== LOCK SCREEN ========== */
+#lock-screen {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: linear-gradient(160deg, #ffd6e7, #ffb8c6, #ff8fab);
+}
+
+.lock-wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 30px 20px 20px;
+    width: 100%;
+    text-align: center;
+}
+
+.profile-img {
+    width: 250px;
+    height: 330px;
+    object-fit: cover;
+    border-radius: 24px;
+    box-shadow: 0 10px 30px rgba(233,30,99,0.3);
+    border: 3px solid rgba(255,255,255,0.7);
+    margin-bottom: 18px;
+}
+
+.profile-placeholder {
+    width: 150px;
+    height: 180px;
+    border-radius: 24px;
+    box-shadow: 0 10px 30px rgba(233,30,99,0.3);
+    border: 3px solid rgba(255,255,255,0.7);
+    background: linear-gradient(135deg, #ff8fab, #e91e63);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 4.5rem;
+    margin-bottom: 18px;
+}
+
+.lock-heart {
+    font-size: 2rem;
+    margin-bottom: 10px;
+    animation: heartBeat 1.4s ease-in-out infinite;
+}
+
+@keyframes heartBeat {
+    0%,100% { transform: scale(1); }
+    25%      { transform: scale(1.25); }
+    50%      { transform: scale(0.95); }
+    75%      { transform: scale(1.15); }
+}
+
+.dots-indicator {
+    display: flex;
+    gap: 12px;
+    margin-bottom: 8px;
+}
+
+.dot {
+    width: 13px;
+    height: 13px;
+    border-radius: 50%;
+    background-color: rgba(255,255,255,0.5);
+    border: 2px solid rgba(233,30,99,0.4);
+    transition: all 0.2s;
+}
+
+.dot.filled {
+    background-color: #e91e63;
+    border-color: #e91e63;
+    box-shadow: 0 2px 8px rgba(233,30,99,0.5);
+    transform: scale(1.15);
+}
+
+.dot.error {
+    background-color: #ff4444;
+    border-color: #ff4444;
+    animation: shake 0.4s ease;
+}
+
+@keyframes shake {
+    0%,100% { transform: translateX(0); }
+    25% { transform: translateX(-5px); }
+    75% { transform: translateX(5px); }
+}
+
+.lock-title {
+    font-size: 0.72rem;
+    color: rgba(100,0,40,0.6);
+    margin-bottom: 18px;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+}
+
+.numpad {
+    display: grid;
+    grid-template-columns: repeat(3, 60px);
+    gap: 12px;
+    justify-content: center;
+    width: 100%;
+}
+
+.num-btn {
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    border: none;
+    background-color: rgba(255,255,255,0.45);
+    font-size: 1.3rem;
+    font-weight: 700;
+    color: #5a0030;
+    cursor: pointer;
+    transition: all 0.15s;
+    backdrop-filter: blur(4px);
+    box-shadow: 0 2px 8px rgba(233,30,99,0.1);
+}
+
+.num-btn:active {
+    background-color: rgba(255,255,255,0.8);
+    transform: scale(0.92);
+}
+
+.num-btn.clear { color: #e91e63; font-size: 1.1rem; }
+
+/* ========== MAIN MENU ========== */
+#main-menu {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+    background: linear-gradient(160deg, #ffd6e7, #ffb8c6, #ff8fab);
+}
+
+.menu-greeting {
+    font-size: 1.2rem;
+    font-weight: 700;
+    color: #c2185b;
+    font-family: Georgia, serif;
+    text-align: center;
+}
+
+.menu-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 30px;
+    padding: 10px;
+}
+
+.menu-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    cursor: pointer;
+    transition: transform 0.2s;
+}
+.menu-item:active { transform: scale(0.92); }
+
+.icon-box {
+    width: 90px;
+    height: 90px;
+    background: rgba(255,255,255,0.5);
+    border-radius: 22px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 10px;
+    box-shadow: 0 4px 15px rgba(233,30,99,0.15);
+    border: 1.5px solid rgba(255,255,255,0.8);
+    font-size: 2.6rem;
+}
+
+.menu-item span {
+    font-size: 1rem;
+    font-weight: 700;
+    color: #5a0030;
+}
+
+/* ========== MODALS ========== */
+.modal {
+    position: absolute;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: rgba(0,0,0,0.15);
+    transition: opacity 0.3s ease;
+    z-index: 100;
+}
+
+.glass-effect {
+    background: rgba(255,255,255,0.72);
+    backdrop-filter: blur(18px);
+    -webkit-backdrop-filter: blur(18px);
+    border: 1.5px solid rgba(255,255,255,0.85);
+    border-radius: 28px;
+    width: 88%;
+    max-height: 88%;
+    padding: 22px;
+    box-shadow: 0 12px 40px rgba(0,0,0,0.18);
+    position: relative;
+    overflow-y: auto;
+    scrollbar-width: none;
+}
+.glass-effect::-webkit-scrollbar { display: none; }
+
+.close-btn {
+    background: #e91e63;
+    color: white;
+    border: none;
+    width: 32px; height: 32px;
+    border-radius: 50%;
+    font-size: 1rem;
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    line-height: 1;
+    font-weight: 700;
+}
+
+.absolute-right {
+    position: absolute;
+    top: 14px; right: 14px;
+    z-index: 10;
+}
+
+/* ========== MUSIC ========== */
+.modal-header {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: #e91e63;
+    font-weight: 800;
+    font-size: 0.85rem;
+    letter-spacing: 1.5px;
+    margin-bottom: 14px;
+    position: relative;
+}
+.modal-header .close-btn { position: absolute; right: 0; }
+
+.music-body {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+}
+
+.album-art {
+    width: 160px; height: 160px;
+    border-radius: 18px;
+    position: relative;
+    background: linear-gradient(135deg, #ff8fab, #e91e63);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 3.5rem;
+    box-shadow: 0 12px 30px rgba(233,30,99,0.35);
+    margin-bottom: 14px;
+    overflow: hidden;
+    flex-shrink: 0;
+    transition: box-shadow 0.3s;
+}
+.album-art img { width: 100%; height: 100%; object-fit: cover; display: block; }
+.album-art.playing {
+    box-shadow: 0 12px 40px rgba(233,30,99,0.55);
+    animation: albumPulse 2s ease-in-out infinite;
+}
+@keyframes albumPulse {
+    0%,100% { transform: scale(1); }
+    50%      { transform: scale(1.03); }
+}
+
+.song-title {
+    color: #c2185b;
+    font-size: 1.1rem;
+    margin-bottom: 2px;
+    text-align: center;
+    font-weight: 800;
+    max-width: 100%;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    padding: 0 10px;
+}
+
+.progress-bar {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 14px;
+    margin-top: 10px;
+}
+.progress-bar .time { font-size: 0.68rem; color: #e91e63; min-width: 30px; font-weight: 600; }
+
+.slider {
+    flex: 1;
+    -webkit-appearance: none;
+    height: 4px;
+    background: rgba(233,30,99,0.2);
+    border-radius: 2px;
+    cursor: pointer;
+}
+.slider::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    width: 14px; height: 14px;
+    border-radius: 50%;
+    background: #e91e63;
+    box-shadow: 0 2px 6px rgba(233,30,99,0.4);
+}
+
+.controls {
+    display: flex;
+    gap: 28px;
+    align-items: center;
+    margin-bottom: 18px;
+}
+.ctrl-btn {
+    background: none; border: none;
+    color: rgba(233,30,99,0.5);
+    font-size: 1.6rem;
+    cursor: pointer;
+    line-height: 1;
+    transition: color 0.2s, transform 0.15s;
+}
+.ctrl-btn:active { transform: scale(0.88); color: #e91e63; }
+
+.play-btn {
+    background: linear-gradient(135deg, #f06292, #e91e63);
+    color: white; border: none;
+    width: 58px; height: 58px;
+    border-radius: 50%;
+    font-size: 1.5rem;
+    cursor: pointer;
+    display: flex; align-items: center; justify-content: center;
+    box-shadow: 0 8px 20px rgba(233,30,99,0.45);
+    line-height: 1;
+    transition: transform 0.15s;
+}
+.play-btn:active { transform: scale(0.92); }
+
+.playlist {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    max-height: 160px;
+    overflow-y: auto;
+    scrollbar-width: none;
+}
+.playlist::-webkit-scrollbar { display: none; }
+
+.playlist-item {
+    display: flex;
+    align-items: center;
+    background: rgba(255,255,255,0.6);
+    padding: 8px 10px;
+    border-radius: 14px;
+    gap: 12px;
+    cursor: pointer;
+    transition: background 0.2s;
+    border: 1.5px solid transparent;
+}
+.playlist-item:hover { background: rgba(233,30,99,0.08); }
+.playlist-item.active-track {
+    background: rgba(233,30,99,0.12);
+    border-color: rgba(233,30,99,0.3);
+}
+
+.track-thumb {
+    width: 44px; height: 44px;
+    border-radius: 10px;
+    overflow: hidden;
+    flex-shrink: 0;
+    background: linear-gradient(135deg, #ff8fab, #e91e63);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 1.2rem;
+}
+.track-thumb img { width: 100%; height: 100%; object-fit: cover; }
+
+.track-info { flex: 1; min-width: 0; }
+.track-name { font-size: 0.82rem; color: #c2185b; font-weight: 700; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.track-sub { font-size: 0.68rem; color: #e91e63; opacity: 0.65; margin-top: 2px; }
+
+.track-playing-dot {
+    width: 8px; height: 8px;
+    border-radius: 50%;
+    background: #e91e63;
+    flex-shrink: 0;
+    opacity: 0;
+    animation: blinkDot 1s ease-in-out infinite;
+}
+.playlist-item.active-track .track-playing-dot { opacity: 1; }
+@keyframes blinkDot { 0%,100%{opacity:0.3} 50%{opacity:1} }
+
+.empty-playlist { text-align: center; padding: 16px; font-size: 0.78rem; color: #e91e63; opacity: 0.6; }
+
+/* ========== LETTER ========== */
+.letter-body { padding-top: 18px; color: #880e4f; line-height: 1.75; }
+.letter-body h2 { font-size: 1.1rem; margin-bottom: 14px; color: #c2185b; font-family: Georgia, serif; }
+.letter-body p { margin-bottom: 12px; font-size: 0.87rem; }
+
+/* ========== GALLERY ========== */
+.gallery-header {
+    text-align: center; color: #e91e63; font-weight: 800;
+    margin-bottom: 12px; font-size: 0.95rem; letter-spacing: 2px;
+}
+
+.gallery-scroll-wrap {
+    overflow: hidden;
+    width: 100%;
+    height: 460px;
+    position: relative;
+    border-radius: 16px;
+}
+
+.gallery-track {
+    display: flex;
+    flex-direction: row;
+    gap: 8px;
+    width: 100%;
+    height: 100%;
+}
+
+.gallery-col {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    flex: 1;
+    will-change: transform;
+}
+
+.gallery-item {
+    width: 100%;
+    aspect-ratio: 1/1;
+    border-radius: 16px;
+    overflow: hidden;
+    cursor: pointer;
+    position: relative;
+    flex-shrink: 0;
+    transition: transform 0.2s;
+    box-shadow: 0 4px 12px rgba(233,30,99,0.2);
+}
+.gallery-item:active { transform: scale(0.96); }
+.gallery-item img { width: 100%; height: 100%; object-fit: cover; display: block; pointer-events: none; }
+
+/* Lightbox */
+.lightbox {
+    position: absolute;
+    inset: 0;
+    background: rgba(0,0,0,0.92);
+    z-index: 200;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.3s;
+    border-radius: 28px;
+}
+.lightbox.show { opacity: 1; pointer-events: auto; }
+.lightbox img {
+    max-width: 90%; max-height: 80%;
+    border-radius: 16px;
+    object-fit: contain;
+    animation: zoomIn 0.3s ease;
+    box-shadow: 0 0 40px rgba(233,30,99,0.5);
+}
+@keyframes zoomIn {
+    from { transform: scale(0.7); opacity: 0; }
+    to   { transform: scale(1);   opacity: 1; }
+}
+.lightbox-close {
+    position: absolute;
+    top: 16px; right: 16px;
+    background: #e91e63;
+    color: white; border: none;
+    width: 36px; height: 36px;
+    border-radius: 50%;
+    font-size: 1.1rem;
+    cursor: pointer;
+    display: flex; align-items: center; justify-content: center;
+    font-weight: 700;
+}
+
+/* ========== GIFT ========== */
+#gift-modal { background: #050510 !important; }
+
+.dark-close {
+    background: rgba(255,255,255,0.15);
+    position: absolute; top: 16px; right: 16px; z-index: 200;
+    border: none; width: 32px; height: 32px; border-radius: 50%;
+    color: white; font-size: 1rem; cursor: pointer;
+    display: flex; align-items: center; justify-content: center;
+}
+
+.gift-scene {
+    width: 100%; height: 100%;
+    position: relative;
+    display: flex; justify-content: center; align-items: flex-end;
+    padding-bottom: 60px; overflow: hidden;
+}
+
+.stars { position: absolute; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none; }
+.star-dot { position: absolute; background: white; border-radius: 50%; animation: twinkle 3s ease-in-out infinite; }
+@keyframes twinkle { 0%,100%{opacity:0.1;transform:scale(0.8)} 50%{opacity:1;transform:scale(1)} }
+
+.flower-emoji { font-size: 9rem; z-index: 5; animation: sway 3s ease-in-out infinite; }
+@keyframes sway { 0%,100%{transform:rotate(-6deg)} 50%{transform:rotate(6deg)} }
+.flower-img { width: 240px; object-fit: contain; z-index: 5; filter: drop-shadow(0 0 20px rgba(255,100,150,0.5)); }
+
+.chat-bubble {
+    position: absolute;
+    background: rgba(255,255,255,0.92);
+    color: #e91e63;
+    padding: 10px 16px;
+    border-radius: 20px;
+    font-weight: 700;
+    font-size: 0.88rem;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.4);
+    transition: opacity 0.6s ease, transform 0.6s ease;
+    z-index: 10;
+}
+.c1 { top: 18%; left: 8%; }
+.c2 { top: 38%; right: 8%; }
+.c3 { top: 58%; left: 15%; }
+
+@keyframes confettiFall {
+    from { transform: translateY(-10px) rotate(0deg); opacity: 1; }
+    to   { transform: translateY(100vh) rotate(540deg); opacity: 0; }
+}
+    </style>
+</head>
+<body>
+
+<div class="app-container">
+
+    <!-- ===== LOCK SCREEN ===== -->
+    <section id="lock-screen" class="screen active">
+        <div class="lock-wrapper">
+            <img src="images/profile.jpg" alt="Profile" class="profile-img"
+                 onerror="this.outerHTML='<div class=\'profile-placeholder\'>🌸</div>'">
+            <div class="lock-heart">💗</div>
+            <div class="lock-title">Nhập mã để mở quà 💝</div>
+            <div class="dots-indicator">
+                <span class="dot"></span>
+                <span class="dot"></span>
+                <span class="dot"></span>
+                <span class="dot"></span>
+            </div>
+            <div class="numpad">
+                <button class="num-btn" data-val="1">1</button>
+                <button class="num-btn" data-val="2">2</button>
+                <button class="num-btn" data-val="3">3</button>
+                <button class="num-btn" data-val="4">4</button>
+                <button class="num-btn" data-val="5">5</button>
+                <button class="num-btn" data-val="6">6</button>
+                <button class="num-btn" data-val="7">7</button>
+                <button class="num-btn" data-val="8">8</button>
+                <button class="num-btn" data-val="9">9</button>
+                <button class="num-btn" style="visibility:hidden;"></button>
+                <button class="num-btn" data-val="0">0</button>
+                <button class="num-btn clear" data-val="clear">⌫</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== MAIN MENU ===== -->
+    <section id="main-menu" class="screen hidden">
+        <div class="menu-greeting">🌸 Chúc mừng 8/3 Bé Iu 🌸</div>
+        <div class="menu-grid">
+            <div class="menu-item" onclick="openModal('music-modal')">
+                <div class="icon-box">🎵</div>
+                <span>Nhạc</span>
+            </div>
+            <div class="menu-item" onclick="openModal('letter-modal')">
+                <div class="icon-box">💌</div>
+                <span>Thư</span>
+            </div>
+            <div class="menu-item" onclick="openModal('gallery-modal')">
+                <div class="icon-box">🖼️</div>
+                <span>Ảnh</span>
+            </div>
+            <div class="menu-item" onclick="openModal('gift-modal')">
+                <div class="icon-box">🎁</div>
+                <span>Quà</span>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== MUSIC MODAL ===== -->
+    <div id="music-modal" class="modal hidden">
+        <div class="modal-content glass-effect">
+            <div class="modal-header">
+                <span>🎵 MUSIC PLAYER</span>
+                <button class="close-btn" onclick="closeModal('music-modal')">✕</button>
+            </div>
+            <div class="music-body">
+                <div class="album-art" id="album-art">
+                    <img src="music/cover.jpg" alt="cover" onerror="this.style.display='none'">
+                    <span id="album-emoji" style="position:absolute;">🎶</span>
+                </div>
+                <div class="song-title" id="song-title">Chưa có bài nào</div>
+                <div class="progress-bar">
+                    <span class="time" id="time-current">0:00</span>
+                    <input type="range" min="0" max="100" value="0" class="slider" id="seek-slider">
+                    <span class="time" id="time-total">0:00</span>
+                </div>
+                <div class="controls">
+                    <button class="ctrl-btn" onclick="prevTrack()">⏮</button>
+                    <button class="play-btn" id="play-btn" onclick="togglePlay()">▶</button>
+                    <button class="ctrl-btn" onclick="nextTrack()">⏭</button>
+                </div>
+                <div class="playlist" id="playlist">
+                    <div class="empty-playlist">Đang tải danh sách nhạc... 🎵</div>
+                </div>
+            </div>
+            <audio id="bg-music"></audio>
+        </div>
+    </div>
+
+    <!-- ===== LETTER MODAL ===== -->
+    <div id="letter-modal" class="modal hidden">
+        <div class="modal-content glass-effect">
+            <button class="close-btn absolute-right" onclick="closeModal('letter-modal')">✕</button>
+            <div class="letter-body">
+                <h2>Send to my Darling,</h2>
+                <p>Anh không giỏi nói lời hoa mỹ,</p>
+                <p>nhưng 8/3 này anh muốn em biết:
+em là điều quý giá nhất của anh ♡
+Cảm ơn em vì đã luôn ở bên
+dịu dàng và yêu anh theo cách
+chân thành nhất.</p>
+                <p style="margin-top:20px;font-weight:700;font-size:1rem;">Anh yêu em ♡<br>— Bồ iu</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- ===== GALLERY MODAL ===== -->
+    <div id="gallery-modal" class="modal hidden">
+        <div class="modal-content glass-effect" style="padding:16px;">
+            <button class="close-btn absolute-right" onclick="closeModal('gallery-modal')">✕</button>
+            <div class="gallery-header">💕 HAPPY WOMEN'S DAY 💕</div>
+            <div class="gallery-scroll-wrap">
+                <div class="gallery-track">
+                    <div class="gallery-col" id="col-left"></div>
+                    <div class="gallery-col" id="col-right"></div>
+                </div>
+            </div>
+            <div class="lightbox" id="lightbox" onclick="closeLightbox()">
+                <button class="lightbox-close" onclick="closeLightbox()">✕</button>
+                <img id="lightbox-img" src="" alt="">
+            </div>
+        </div>
+    </div>
+
+    <!-- ===== GIFT MODAL ===== -->
+    <div id="gift-modal" class="modal hidden">
+        <button class="dark-close" onclick="closeModal('gift-modal')">✕</button>
+        <div class="gift-scene">
+            <div class="stars" id="stars"></div>
+            <img src="flower.gif" alt="Flower" class="flower-img"
+                 onerror="this.outerHTML='<div class=\'flower-emoji\'>📿</div>'">
+            <div class="chat-bubble c1 hidden">chúc</div>
+            <div class="chat-bubble c2 hidden">bé</div>
+            <div class="chat-bubble c3 hidden">8/3 vui vẻ</div>
+        </div>
+    </div>
+
+</div>
+
+<script>
+// ============ PASSCODE ============
+const CORRECT_PASS = "0711";
+let currentPass = "";
+const dots = document.querySelectorAll('.dot');
+const lockScreen = document.getElementById('lock-screen');
+const mainMenu   = document.getElementById('main-menu');
+
+document.querySelectorAll('.num-btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+        const val = btn.getAttribute('data-val');
+        if (!val) return;
+        if (val === "clear") {
+            currentPass = currentPass.slice(0, -1);
+        } else if (currentPass.length < 4) {
+            currentPass += val;
+        }
+        updateDots();
+        checkPasscode();
+    });
+});
+
+function updateDots() {
+    dots.forEach((d, i) => {
+        d.classList.toggle('filled', i < currentPass.length);
+        d.classList.remove('error');
+    });
+}
+
+function checkPasscode() {
+    if (currentPass.length < 4) return;
+    if (currentPass === CORRECT_PASS) {
+        for (let i = 0; i < 50; i++) spawnConfetti();
+        setTimeout(() => {
+            lockScreen.classList.replace('active', 'hidden');
+            mainMenu.classList.replace('hidden', 'active');
+        }, 400);
+    } else {
+        dots.forEach(d => d.classList.add('error'));
+        setTimeout(() => { currentPass = ""; updateDots(); }, 500);
+    }
+}
+
+function spawnConfetti() {
+    const c = document.createElement('div');
+    const colors = ['#e91e63','#ff8fab','#ffe066','#80deea','#b9f6ca'];
+    c.style.cssText = `position:fixed;width:7px;height:7px;border-radius:2px;
+        background:${colors[Math.floor(Math.random()*colors.length)]};
+        left:${10+Math.random()*80}%;top:0;z-index:9999;pointer-events:none;
+        animation:confettiFall ${1.2+Math.random()}s ease-in ${Math.random()*0.4}s both;`;
+    document.body.appendChild(c);
+    setTimeout(() => c.remove(), 2500);
+}
+
+// ============ MODALS ============
+function openModal(id) {
+    const m = document.getElementById(id);
+    m.classList.replace('hidden', 'active');
+    if (id === 'gift-modal') runGiftAnimation();
+    if (id === 'gallery-modal') startGalleryScroll();
+}
+
+function closeModal(id) {
+    document.getElementById(id).classList.replace('active', 'hidden');
+}
+
+// ============ MUSIC PLAYER ============
+// Thêm file mp3 vào folder "music/" rồi khai báo vào đây
+const PLAYLIST = [
+    { name: "Nơi này có anh", file: "music/noi_nay_co_anh.mp3",       cover: "music/IMG_1186.jpg" },
+    { name: "Một Đời", file: "music/mot_doi.mp3",         cover: "music/IMG_1186.jpg" },
+    { name: "Một Ngày Nào Đó", file: "music/mot_ngay_nao_do.mp3",    cover: "music/IMG_1186.jpg" },
+    { name: "In Love", file: "music/in_love.mp3",                    cover: "music/IMG_1186.jpg" },
+];
+
+let songs = PLAYLIST.map(p => ({ ...p }));
+let currentIdx = -1, isPlaying = false;
+const audioEl    = document.getElementById("bg-music");
+const albumArtEl = document.getElementById("album-art");
+
+audioEl.addEventListener("timeupdate", () => {
+    if (!audioEl.duration) return;
+    document.getElementById("seek-slider").value = audioEl.currentTime / audioEl.duration * 100;
+    document.getElementById("time-current").textContent = fmt(audioEl.currentTime);
+    document.getElementById("time-total").textContent   = fmt(audioEl.duration);
+});
+audioEl.addEventListener("ended", nextTrack);
+audioEl.addEventListener("error", () => {
+    document.getElementById("song-title").textContent = "❌ Không tìm thấy file";
+    stopState();
+});
+document.getElementById("seek-slider").addEventListener("input", e => {
+    if (audioEl.duration) audioEl.currentTime = e.target.value / 100 * audioEl.duration;
+});
+
+function fmt(s) {
+    if (!s || isNaN(s)) return "0:00";
+    return Math.floor(s/60) + ":" + String(Math.floor(s%60)).padStart(2,"0");
+}
+
+function renderPlaylist() {
+    const pl = document.getElementById("playlist");
+    if (!songs.length) { pl.innerHTML = '<div class="empty-playlist">Không có bài hát 🎵</div>'; return; }
+    pl.innerHTML = songs.map((s, i) => {
+        const active = i === currentIdx;
+        return `<div class="playlist-item ${active ? "active-track" : ""}" onclick="playSong(${i})">
+            <div class="track-thumb">
+                <img src="${s.cover}" alt="" onerror="this.style.display='none'">
+            </div>
+            <div class="track-info">
+                <div class="track-name">${s.name}</div>
+                <div class="track-sub">${active && isPlaying ? "▶ Đang phát" : "🎵 MP3"}</div>
+            </div>
+            <div class="track-playing-dot"></div>
+        </div>`;
+    }).join("");
+}
+
+function updateAlbumArt(song) {
+    const img   = albumArtEl.querySelector("img");
+    const emoji = document.getElementById("album-emoji");
+    if (img) {
+        img.style.display = "block";
+        img.src = song.cover;
+        img.onerror = function() { this.style.display = "none"; };
+    }
+    if (emoji) emoji.style.display = "none";
+}
+
+function playSong(idx) {
+    if (idx < 0 || idx >= songs.length) return;
+    currentIdx = idx;
+    const s = songs[idx];
+    audioEl.src = s.file;
+    audioEl.play().then(() => {
+        isPlaying = true;
+        document.getElementById("play-btn").textContent = "⏸";
+        document.getElementById("song-title").textContent = s.name;
+        albumArtEl.classList.add("playing");
+        updateAlbumArt(s);
+        renderPlaylist();
+    }).catch(() => {
+        document.getElementById("song-title").textContent = "❌ " + s.name + " (không tìm thấy)";
+        stopState();
+    });
+}
+
+function togglePlay() {
+    if (!songs.length) return;
+    if (currentIdx === -1) { playSong(0); return; }
+    if (isPlaying) {
+        audioEl.pause(); stopState();
+    } else {
+        audioEl.play().then(() => {
+            isPlaying = true;
+            document.getElementById("play-btn").textContent = "⏸";
+            albumArtEl.classList.add("playing");
+            renderPlaylist();
+        });
+    }
+}
+
+function stopState() {
+    isPlaying = false;
+    document.getElementById("play-btn").textContent = "▶";
+    albumArtEl.classList.remove("playing");
+    renderPlaylist();
+}
+
+function nextTrack() { playSong((currentIdx + 1) % songs.length); }
+function prevTrack() {
+    if (audioEl.currentTime > 3) { audioEl.currentTime = 0; return; }
+    playSong((currentIdx - 1 + songs.length) % songs.length);
+}
+
+renderPlaylist();
+
+// ============ GIFT ============
+(function buildStars() {
+    const c = document.getElementById('stars');
+    for (let i = 0; i < 70; i++) {
+        const s = document.createElement('div');
+        const sz = 1 + Math.random() * 2.5;
+        s.className = 'star-dot';
+        s.style.cssText = `width:${sz}px;height:${sz}px;left:${Math.random()*100}%;top:${Math.random()*100}%;animation-delay:${Math.random()*3}s;animation-duration:${2+Math.random()*3}s`;
+        c.appendChild(s);
+    }
+})();
+
+function runGiftAnimation() {
+    const bubbles = document.querySelectorAll('.chat-bubble');
+    bubbles.forEach(b => { b.classList.add('hidden'); b.style.opacity=0; b.style.transform='translateY(20px)'; });
+    [600, 1600, 2600].forEach((t, i) => setTimeout(() => {
+        bubbles[i].classList.remove('hidden');
+        bubbles[i].style.opacity = 1;
+        bubbles[i].style.transform = 'translateY(0)';
+    }, t));
+}
+
+// ============ GALLERY ============
+const GRADIENTS = [
+    'linear-gradient(135deg,#ff8fab,#e91e63)',
+    'linear-gradient(135deg,#e91e63,#c2185b)',
+    'linear-gradient(135deg,#c2185b,#880e4f)',
+    'linear-gradient(135deg,#880e4f,#ff8fab)',
+    'linear-gradient(135deg,#ff8fab,#c2185b)',
+    'linear-gradient(135deg,#e91e63,#ff8fab)',
+    'linear-gradient(135deg,#ffb3c6,#e91e63)',
+    'linear-gradient(135deg,#c2185b,#ff8fab)',
+    'linear-gradient(135deg,#e91e63,#880e4f)',
+    'linear-gradient(135deg,#ff8fab,#880e4f)',
+];
+
+// Thêm ảnh vào folder "images/" rồi khai báo vào đây
+const PHOTOS = [
+    { src: "images/1.jpg" },
+    { src: "images/2.jpg" },
+    { src: "images/3.jpg" },
+    { src: "images/4.jpg" },
+    { src: "images/5.jpg" },
+    { src: "images/6.jpg" }
+];
+
+let galleryStarted = false;
+
+function buildGallery() {
+    const colLeft  = document.getElementById('col-left');
+    const colRight = document.getElementById('col-right');
+    if (!colLeft || !colRight) return;
+    colLeft.innerHTML = '';
+    colRight.innerHTML = '';
+
+    const leftPhotos  = PHOTOS.filter((_,i) => i % 2 === 0);
+    const rightPhotos = PHOTOS.filter((_,i) => i % 2 === 1);
+
+    function makeItem(src, gradient) {
+        const div = document.createElement('div');
+        div.className = 'gallery-item';
+        div.style.background = gradient;
+        const img = document.createElement('img');
+        img.src = src; img.alt = 'photo';
+        img.onerror = function() { this.style.display = 'none'; };
+        div.appendChild(img);
+        div.addEventListener('click', () => openLightbox(src, gradient));
+        return div;
+    }
+
+    function fillCol(col, photos, startIdx) {
+        // 4 lần để scroll vô tận không bao giờ hết ảnh
+        for (let r = 0; r < 4; r++) {
+            photos.forEach((p, i) => {
+                col.appendChild(makeItem(p.src, GRADIENTS[(startIdx + i) % GRADIENTS.length]));
+            });
+        }
+    }
+
+    fillCol(colLeft,  leftPhotos,  0);
+    fillCol(colRight, rightPhotos, 1);
+}
+
+function startGalleryScroll() {
+    if (galleryStarted) return;
+    galleryStarted = true;
+    buildGallery();
+
+    const colLeft  = document.getElementById('col-left');
+    const colRight = document.getElementById('col-right');
+
+    const SPEED = 0.6; // px/frame — tăng để nhanh hơn
+    let posLeft = 0, posRight = 0;
+    let pauseLeft = false, pauseRight = false;
+
+  // Chỉ pause khi hover trên desktop, mobile thì bỏ qua hoàn toàn
+    const isTouch = navigator.maxTouchPoints > 0;
+    if (!isTouch) {
+        colLeft.addEventListener('mouseenter',  () => pauseLeft  = true);
+        colLeft.addEventListener('mouseleave',  () => pauseLeft  = false);
+        colRight.addEventListener('mouseenter', () => pauseRight = true);
+        colRight.addEventListener('mouseleave', () => pauseRight = false);
+    }
+
+    // Cột phải bắt đầu lệch pha để trông tự nhiên
+    posRight = colRight.scrollHeight / 4;
+
+    function loop() {
+        // Cột trái: cuộn lên
+        if (!pauseLeft) {
+            posLeft += SPEED;
+            const half = colLeft.scrollHeight / 2;
+            if (posLeft >= half) posLeft -= half; // teleport không giật
+            colLeft.style.transform = `translateY(-${posLeft}px)`;
+        }
+        // Cột phải: cuộn lên (lệch pha)
+        if (!pauseRight) {
+            posRight += SPEED;
+            const half = colRight.scrollHeight / 2;
+            if (posRight >= half) posRight -= half;
+            colRight.style.transform = `translateY(-${posRight}px)`;
+        }
+        requestAnimationFrame(loop);
+    }
+
+    requestAnimationFrame(loop);
+}
+
+function openLightbox(src, gradient) {
+    const lb  = document.getElementById('lightbox');
+    const img = document.getElementById('lightbox-img');
+    lb.style.background = 'rgba(0,0,0,0.92)';
+    img.style.display = 'block';
+    img.style.background = gradient;
+    img.src = src;
+    img.onerror = function() { this.style.display = 'none'; lb.style.background = gradient; };
+    lb.classList.add('show');
+}
+
+function closeLightbox() {
+    document.getElementById('lightbox').classList.remove('show');
+}
+</script>
+</body>
+</html>
